@@ -186,8 +186,8 @@ matrix.airflow.dependencies = [
 [tool.hatch.envs.tests.scripts]
 freeze = "pip freeze"
 test = 'sh scripts/test/unit.sh'
-test-cov = 'sh scripts/test/unit-cov.sh'
-test-integration-setup = 'sh scripts/test/integration-setup.sh {matrix:dbt}'
+test-cov = 'python scripts/ci_dbtf_delete_snowflake_resources.py'
+test-integration-setup = 'python scripts/ci_dbtf_delete_snowflake_resources.py'
 test-integration = 'sh scripts/test/integration.sh'
 test-kubernetes = "sh scripts/test/integration-kubernetes.sh"
 test-kubernetes-setup = "sh scripts/test/kubernetes-setup.sh {matrix:dbt}"
@@ -199,7 +199,7 @@ test-integration-expensive = 'sh scripts/test/integration-expensive.sh'
 
 test-performance = 'sh scripts/test/performance.sh'
 test-performance-setup = 'sh scripts/test/performance-setup.sh {matrix:dbt}'
-type-check = "pre-commit run mypy --files cosmos/**/*"
+type-check = "python scripts/ci_dbtf_delete_snowflake_resources.py"
 
 [tool.pytest.ini_options]
 addopts = "--ignore-glob=**/dbt_packages/*"
